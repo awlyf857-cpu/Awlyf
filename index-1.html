@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>عالم الظلال</title>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--cr:#8B0000;--crb:#C0392B;--sl:#BDC3C7;--dk:#0A0A0A;--dk2:#111;--dk3:#1A1A1A;--tx:#D5D5D5;--txd:#888;}
+*{margin:0;padding:0;box-sizing:border-box;}html{scroll-behavior:smooth;}
+body{background:var(--dk);color:var(--tx);font-family:'Cairo',sans-serif;line-height:1.8;overflow-x:hidden;}
+nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(10,10,10,0.95);backdrop-filter:blur(12px);border-bottom:1px solid #1f1f1f;padding:0 1.5rem;display:flex;align-items:center;justify-content:space-between;height:64px;}
+.nav-logo{font-family:'Amiri',serif;font-size:1.4rem;color:var(--crb);text-decoration:none;}
+.nav-links{display:flex;gap:1.2rem;list-style:none;}
+.nav-links a{color:var(--sl);text-decoration:none;font-size:0.85rem;transition:color 0.3s;}
+.nav-links a:hover{color:#fff;}
+.admin-btn{background:transparent;border:1px solid #2a2a2a;color:var(--txd);padding:0.4rem 0.9rem;border-radius:2px;cursor:pointer;font-family:'Cairo',sans-serif;font-size:0.78rem;transition:all 0.3s;}
+.admin-btn:hover{border-color:var(--cr);color:var(--crb);}
+.hero{min-height:100vh;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;padding-top:64px;}
+.hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 20% 30%,rgba(139,0,0,0.18) 0%,transparent 70%),radial-gradient(ellipse 40% 60% at 80% 70%,rgba(139,0,0,0.10) 0%,transparent 70%);animation:pulse 8s ease-in-out infinite alternate;}
+@keyframes pulse{from{opacity:0.6;}to{opacity:1;}}
+.hero::after{content:'';position:absolute;top:15%;right:12%;width:1px;height:50%;background:linear-gradient(to bottom,transparent,var(--cr),transparent);opacity:0.5;}
+.hero-content{text-align:center;position:relative;z-index:1;max-width:780px;padding:2rem;}
+.hero-eyebrow{font-size:0.75rem;letter-spacing:6px;text-transform:uppercase;color:var(--crb);margin-bottom:1.5rem;font-weight:300;}
+.hero-title{font-family:'Amiri',serif;font-size:clamp(3rem,8vw,6.5rem);line-height:1.1;color:#fff;margin-bottom:1rem;text-shadow:0 0 60px rgba(139,0,0,0.4);}
+.hero-title span{color:var(--crb);font-style:italic;}
+.hero-sub{font-size:1.05rem;color:var(--sl);max-width:480px;margin:0 auto 2.5rem;font-weight:300;}
+.hero-cta{display:inline-flex;gap:1rem;flex-wrap:wrap;justify-content:center;}
+.btn{padding:0.75rem 2rem;font-family:'Cairo',sans-serif;font-size:0.9rem;font-weight:600;border-radius:2px;cursor:pointer;text-decoration:none;transition:all 0.3s;display:inline-block;}
+.btn-p{background:var(--cr);color:#fff;border:1px solid var(--cr);}
+.btn-p:hover{background:var(--crb);box-shadow:0 0 24px rgba(192,57,43,0.4);transform:translateY(-2px);}
+.btn-o{background:transparent;color:var(--sl);border:1px solid #333;}
+.btn-o:hover{border-color:var(--sl);color:#fff;transform:translateY(-2px);}
+.scroll-hint{position:absolute;bottom:2rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:0.4rem;color:var(--txd);font-size:0.7rem;letter-spacing:3px;animation:bounce 2s infinite;}
+.scroll-hint::after{content:'';width:1px;height:40px;background:linear-gradient(to bottom,var(--cr),transparent);}
+@keyframes bounce{0%,100%{transform:translateX(-50%) translateY(0);}50%{transform:translateX(-50%) translateY(6px);}}
+section{padding:6rem 2rem;}
+.sec-hd{text-align:center;margin-bottom:4rem;}
+.sec-tag{display:inline-block;font-size:0.7rem;letter-spacing:5px;text-transform:uppercase;color:var(--crb);margin-bottom:0.75rem;}
+.sec-title{font-family:'Amiri',serif;font-size:clamp(2rem,4vw,3rem);color:#fff;}
+.divider{width:60px;height:2px;background:var(--cr);margin:1rem auto 0;}
+#novels{background:var(--dk2);}
+.novels-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:2rem;max-width:1100px;margin:0 auto;}
+.novel-card{background:var(--dk3);border:1px solid #1e1e1e;border-radius:4px;overflow:hidden;transition:transform 0.4s,box-shadow 0.4s,border-color 0.4s;}
+.novel-card:hover{transform:translateY(-6px);box-shadow:0 16px 48px rgba(0,0,0,0.6),0 0 0 1px var(--cr);border-color:var(--cr);}
+.novel-cover{height:200px;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;}
+.nc1{background:linear-gradient(160deg,#1a0000,#0d0d0d);}
+.nc2{background:linear-gradient(160deg,#0d0d1a,#0a0a0a);}
+.nc3{background:linear-gradient(160deg,#0d1a0d,#0a0a0a);}
+.novel-cover::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 50% 30%,rgba(139,0,0,0.25),transparent 65%);}
+.cover-sym{font-family:'Amiri',serif;font-size:4rem;color:rgba(139,0,0,0.6);position:relative;z-index:1;}
+.novel-info{padding:1.5rem;}
+.novel-genre{font-size:0.68rem;letter-spacing:3px;text-transform:uppercase;color:var(--crb);margin-bottom:0.5rem;}
+.novel-title{font-family:'Amiri',serif;font-size:1.3rem;color:#fff;margin-bottom:0.5rem;}
+.novel-exc{font-size:0.85rem;color:var(--txd);line-height:1.7;margin-bottom:1rem;}
+.novel-link{font-size:0.8rem;color:var(--crb);cursor:pointer;background:none;border:none;font-family:'Cairo',sans-serif;transition:letter-spacing 0.3s;}
+.novel-link:hover{letter-spacing:3px;}
+#blog{background:var(--dk);}
+.blog-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;max-width:1100px;margin:0 auto;}
+.blog-card{background:var(--dk3);border:1px solid #1e1e1e;border-radius:4px;padding:2rem;transition:border-color 0.3s,transform 0.3s;}
+.blog-card:hover{border-color:#333;transform:translateY(-3px);}
+.blog-date{font-size:0.72rem;color:var(--txd);letter-spacing:2px;margin-bottom:0.75rem;}
+.blog-title{font-family:'Amiri',serif;font-size:1.3rem;color:#fff;margin-bottom:0.75rem;line-height:1.4;}
+.blog-exc{font-size:0.875rem;color:var(--txd);line-height:1.8;margin-bottom:1rem;}
+.blog-tag{display:inline-block;font-size:0.68rem;letter-spacing:2px;text-transform:uppercase;color:var(--txd);border:1px solid #2a2a2a;padding:0.2rem 0.7rem;border-radius:2px;margin-left:0.5rem;margin-bottom:0.5rem;}
+.blog-more{display:inline-block;margin-top:1rem;font-size:0.8rem;color:var(--crb);cursor:pointer;background:none;border:none;font-family:'Cairo',sans-serif;}
+#about{background:var(--dk2);display:grid;place-items:center;}
+.about-inner{max-width:760px;text-align:center;}
+.about-portrait{width:120px;height:120px;border-radius:50%;margin:0 auto 2rem;background:linear-gradient(135deg,#1a0000,#2a0808);border:2px solid var(--cr);display:flex;align-items:center;justify-content:center;font-family:'Amiri',serif;font-size:3rem;color:var(--crb);box-shadow:0 0 40px rgba(139,0,0,0.3);}
+.about-name{font-family:'Amiri',serif;font-size:2rem;color:#fff;margin-bottom:0.5rem;}
+.about-role{font-size:0.8rem;letter-spacing:4px;text-transform:uppercase;color:var(--crb);margin-bottom:2rem;}
+.about-bio{font-size:1rem;color:var(--txd);line-height:2;max-width:600px;margin:0 auto 2rem;}
+.quote-sec{background:var(--dk);padding:5rem 2rem;text-align:center;border-top:1px solid #111;border-bottom:1px solid #111;}
+.quote-txt{font-family:'Amiri',serif;font-size:clamp(1.4rem,3vw,2.2rem);color:#ddd;font-style:italic;max-width:700px;margin:0 auto 1.5rem;line-height:1.7;}
+.quote-auth{font-size:0.78rem;letter-spacing:4px;text-transform:uppercase;color:var(--crb);}
+#newsletter{background:var(--dk2);padding:5rem 2rem;text-align:center;}
+.nl-inner{max-width:480px;margin:0 auto;}
+.nl-title{font-family:'Amiri',serif;font-size:2rem;color:#fff;margin-bottom:0.75rem;}
+.nl-desc{font-size:0.9rem;color:var(--txd);margin-bottom:2rem;}
+.nl-form{display:flex;border:1px solid #2a2a2a;border-radius:2px;overflow:hidden;}
+.nl-form input{flex:1;background:var(--dk3);border:none;outline:none;padding:0.85rem 1.25rem;color:#fff;font-family:'Cairo',sans-serif;font-size:0.9rem;direction:rtl;}
+.nl-form input::placeholder{color:var(--txd);}
+.nl-form button{background:var(--cr);color:#fff;border:none;padding:0.85rem 1.5rem;font-family:'Cairo',sans-serif;font-size:0.85rem;font-weight:600;cursor:pointer;transition:background 0.3s;white-space:nowrap;}
+.nl-form button:hover{background:var(--crb);}
+footer{background:var(--dk);border-top:1px solid #111;padding:3rem 2rem;text-align:center;}
+.ft-logo{font-family:'Amiri',serif;font-size:1.6rem;color:var(--crb);margin-bottom:1rem;}
+.ft-links{display:flex;justify-content:center;gap:2rem;list-style:none;margin-bottom:2rem;flex-wrap:wrap;}
+.ft-links a{color:var(--txd);text-decoration:none;font-size:0.85rem;transition:color 0.3s;}
+.ft-links a:hover{color:var(--crb);}
+.ft-copy{font-size:0.75rem;color:#333;}
+.fi{opacity:0;transform:translateY(24px);transition:opacity 0.7s,transform 0.7s;}
+.fi.vis{opacity:1;transform:translateY(0);}
+/* MODAL */
+.overlay{display:none;position:fixed;inset:0;z-index:1000;background:rgba(0,0,0,0.85);backdrop-filter:blur(6px);align-items:center;justify-content:center;padding:1rem;}
+.overlay.open{display:flex;}
+.modal{background:var(--dk2);border:1px solid #2a2a2a;border-radius:4px;width:100%;max-width:660px;max-height:90vh;overflow-y:auto;padding:2rem;position:relative;}
+.modal-x{position:absolute;top:1rem;left:1rem;background:none;border:none;color:var(--txd);font-size:1.4rem;cursor:pointer;}
+.modal-x:hover{color:#fff;}
+.read-title{font-family:'Amiri',serif;font-size:1.8rem;color:#fff;margin-bottom:0.5rem;}
+.read-meta{font-size:0.75rem;color:var(--txd);margin-bottom:1.5rem;letter-spacing:2px;}
+.read-body{font-size:1rem;color:var(--tx);line-height:2;white-space:pre-wrap;}
+/* ADMIN */
+#adm{display:none;position:fixed;inset:0;z-index:2000;background:var(--dk);overflow-y:auto;}
+.adm-hd{background:var(--dk2);border-bottom:1px solid #1f1f1f;padding:1rem 1.5rem;display:flex;align-items:center;justify-content:space-between;position:sticky;top:0;z-index:10;}
+.adm-logo{font-family:'Amiri',serif;font-size:1.2rem;color:var(--crb);}
+.adm-back{background:transparent;border:1px solid #2a2a2a;color:var(--txd);padding:0.4rem 1rem;border-radius:2px;cursor:pointer;font-family:'Cairo',sans-serif;font-size:0.8rem;transition:all 0.3s;}
+.adm-back:hover{border-color:#555;color:#fff;}
+.adm-body{max-width:800px;margin:0 auto;padding:2rem 1.5rem;}
+.adm-tabs{display:flex;border-bottom:1px solid #1f1f1f;margin-bottom:2rem;overflow-x:auto;}
+.tbtn{background:none;border:none;border-bottom:2px solid transparent;padding:0.75rem 1.25rem;color:var(--txd);font-family:'Cairo',sans-serif;font-size:0.9rem;cursor:pointer;transition:all 0.3s;white-space:nowrap;}
+.tbtn.act{color:#fff;border-bottom-color:var(--crb);}
+.tc{display:none;}.tc.act{display:block;}
+.fg{margin-bottom:1.25rem;}
+.fg label{display:block;font-size:0.78rem;letter-spacing:2px;text-transform:uppercase;color:var(--sl);margin-bottom:0.5rem;}
+.fg input,.fg textarea{width:100%;background:var(--dk3);border:1px solid #2a2a2a;border-radius:2px;padding:0.75rem 1rem;color:#fff;font-family:'Cairo',sans-serif;font-size:0.9rem;outline:none;transition:border-color 0.3s;direction:rtl;}
+.fg input:focus,.fg textarea:focus{border-color:var(--cr);}
+.fg textarea{min-height:140px;resize:vertical;}
+.bsave{background:var(--cr);color:#fff;border:none;padding:0.75rem 2rem;font-family:'Cairo',sans-serif;font-size:0.9rem;font-weight:600;border-radius:2px;cursor:pointer;transition:background 0.3s;width:100%;margin-top:0.5rem;}
+.bsave:hover{background:var(--crb);}
+.bdel{background:transparent;color:#666;border:1px solid #2a2a2a;padding:0.4rem 0.8rem;font-family:'Cairo',sans-serif;font-size:0.75rem;border-radius:2px;cursor:pointer;transition:all 0.3s;}
+.bdel:hover{border-color:#c0392b;color:#c0392b;}
+.bedit{background:transparent;color:var(--crb);border:1px solid #2a2a2a;padding:0.4rem 0.8rem;font-family:'Cairo',sans-serif;font-size:0.75rem;border-radius:2px;cursor:pointer;margin-left:0.5rem;}
+.bedit:hover{border-color:var(--crb);}
+.ilist{margin-top:2rem;}
+.irow{background:var(--dk3);border:1px solid #1e1e1e;border-radius:4px;padding:1rem 1.25rem;margin-bottom:0.75rem;display:flex;align-items:flex-start;gap:1rem;}
+.irow-info{flex:1;}
+.irow-t{font-family:'Amiri',serif;font-size:1.1rem;color:#fff;margin-bottom:0.2rem;}
+.irow-m{font-size:0.75rem;color:var(--txd);}
+.irow-act{display:flex;align-items:center;gap:0.5rem;flex-shrink:0;}
+/* LOGIN */
+.login-box{max-width:360px;margin:0 auto;padding-top:5rem;text-align:center;}
+.login-box h2{font-family:'Amiri',serif;font-size:2rem;color:#fff;margin-bottom:0.5rem;}
+.login-box p{color:var(--txd);font-size:0.85rem;margin-bottom:2rem;}
+.lerr{color:#c0392b;font-size:0.82rem;margin-top:0.75rem;display:none;}
+.sub-hd{font-family:'Amiri',serif;font-size:1.4rem;color:#fff;margin-bottom:1.5rem;}
+/* TOAST */
+.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(100px);background:var(--dk3);border:1px solid var(--cr);color:#fff;padding:0.75rem 1.5rem;border-radius:2px;font-size:0.85rem;z-index:9999;transition:transform 0.4s;white-space:nowrap;}
+.toast.show{transform:translateX(-50%) translateY(0);}
+@media(max-width:600px){.nav-links{gap:0.8rem;font-size:0.78rem;}.nl-form{flex-direction:column;}.nl-form button{width:100%;}}
+</style>
+</head>
+<body>
+<nav>
+  <a href="#" class="nav-logo" id="site-logo">✦ عالم الظلال</a>
+  <ul class="nav-links">
+    <li><a href="#novels">الروايات</a></li>
+    <li><a href="#blog">المدونة</a></li>
+    <li><a href="#about">عن الكاتب</a></li>
+  </ul>
+  <button class="admin-btn" onclick="openAdm()">⚙ لوحة التحكم</button>
+</nav>
+
+<section class="hero">
+  <div class="hero-content">
+    <p class="hero-eyebrow">رومانسية مظلمة · كتابة من الأعماق</p>
+    <h1 class="hero-title">حيث تُولد<br><span>الظلمة</span> حباً</h1>
+    <p class="hero-sub">روايات تسكن المساحة الرمادية بين الشوق والألم، بين الضوء والعتمة.</p>
+    <div class="hero-cta">
+      <a href="#novels" class="btn btn-p">استكشف الروايات</a>
+      <a href="#blog" class="btn btn-o">اقرأ المدونة</a>
+    </div>
+  </div>
+  <div class="scroll-hint">تمرير</div>
+</section>
+
+<section id="novels">
+  <div class="sec-hd fi"><span class="sec-tag">الأعمال</span><h2 class="sec-title">الروايات</h2><div class="divider"></div></div>
+  <div class="novels-grid" id="novels-cont"></div>
+</section>
+
+<div class="quote-sec">
+  <blockquote class="quote-txt fi">"الكتابة ليست هرباً من الواقع، بل هي طريقة أخرى للعيش فيه — بصدق أكثر وجرأة أقل خوفاً."</blockquote>
+  <p class="quote-auth fi">— الكاتب</p>
+</div>
+
+<section id="blog">
+  <div class="sec-hd fi"><span class="sec-tag">أفكار وكلمات</span><h2 class="sec-title">المدونة</h2><div class="divider"></div></div>
+  <div class="blog-grid" id="blog-cont"></div>
+</section>
+
+<section id="about">
+  <div class="about-inner fi">
+    <div class="about-portrait">ك</div>
+    <h2 class="about-name" id="aname">الكاتب</h2>
+    <p class="about-role">روائي · صانع عوالم</p>
+    <p class="about-bio" id="abio">أكتب في المساحة التي يخشى الناس الاعتراف بوجودها — بين الحب والجرح، بين الرغبة والخوف.</p>
+    <a href="#novels" class="btn btn-o">اكتشف عوالمي</a>
+  </div>
+</section>
+
+<section id="newsletter">
+  <div class="nl-inner fi">
+    <h2 class="nl-title">ابقَ في الظل</h2>
+    <p class="nl-desc">اشترك لتصلك فصول جديدة ومقالات مباشرة إلى بريدك.</p>
+    <div class="nl-form">
+      <input type="email" placeholder="بريدك الإلكتروني" id="email-inp"/>
+      <button onclick="subEmail()">اشترك</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="ft-logo" id="ft-logo">✦ عالم الظلال</div>
+  <ul class="ft-links">
+    <li><a href="#novels">الروايات</a></li>
+    <li><a href="#blog">المدونة</a></li>
+    <li><a href="#about">عن الكاتب</a></li>
+  </ul>
+  <p class="ft-copy">© ٢٠٢٦ عالم الظلال. جميع الحقوق محفوظة.</p>
+</footer>
+
+<!-- READ MODAL -->
+<div class="overlay" id="read-ov">
+  <div class="modal">
+    <button class="modal-x" onclick="closeRead()">✕</button>
+    <div id="read-cnt"></div>
+  </div>
+</div>
+
+<!-- ADMIN -->
+<div id="adm">
+  <div id="adm-login">
+    <div class="login-box">
+      <h2>✦ لوحة التحكم</h2>
+      <p>أدخل كلمة المرور للدخول</p>
+      <div class="fg"><input type="password" id="pinp" placeholder="كلمة المرور" onkeydown="if(event.key==='Enter')chkPass()"/></div>
+      <button class="bsave" onclick="chkPass()">دخول</button>
+      <p class="lerr" id="perr">كلمة المرور غير صحيحة</p>
+      <br><br>
+      <button class="adm-back" onclick="closeAdm()">← العودة للموقع</button>
+    </div>
+  </div>
+  <div id="adm-dash" style="display:none;">
+    <div class="adm-hd">
+      <span class="adm-logo">✦ لوحة التحكم</span>
+      <button class="adm-back" onclick="closeAdm()">← العودة للموقع</button>
+    </div>
+    <div class="adm-body">
+      <div class="adm-tabs">
+        <button class="tbtn act" onclick="stab('t-nov',this)">📖 الروايات</button>
+        <button class="tbtn" onclick="stab('t-blg',this)">✍ المدونة</button>
+        <button class="tbtn" onclick="stab('t-set',this)">⚙ الإعدادات</button>
+      </div>
+      <!-- NOVELS TAB -->
+      <div class="tc act" id="t-nov">
+        <p class="sub-hd" id="nov-fhd">إضافة رواية جديدة</p>
+        <div class="fg"><label>عنوان الرواية</label><input type="text" id="fn-title" placeholder="اكتب عنوان الرواية"/></div>
+        <div class="fg"><label>التصنيف</label><input type="text" id="fn-genre" placeholder="مثال: رومانسية مظلمة"/></div>
+        <div class="fg"><label>الوصف المختصر</label><textarea id="fn-exc" placeholder="وصف قصير يظهر في بطاقة الرواية..."></textarea></div>
+        <div class="fg"><label>محتوى الفصل الأول</label><textarea id="fn-cnt" style="min-height:200px;" placeholder="اكتب الفصل الأول هنا..."></textarea></div>
+        <input type="hidden" id="fn-id"/>
+        <button class="bsave" onclick="saveNovel()">حفظ الرواية ✦</button>
+        <div class="ilist" id="adm-nov-list"></div>
+      </div>
+      <!-- BLOG TAB -->
+      <div class="tc" id="t-blg">
+        <p class="sub-hd" id="blg-fhd">كتابة مقال جديد</p>
+        <div class="fg"><label>عنوان المقال</label><input type="text" id="fb-title" placeholder="اكتب عنوان المقال"/></div>
+        <div class="fg"><label>الوسوم (افصل بفاصلة)</label><input type="text" id="fb-tags" placeholder="مثال: كتابة, أدب, تأمل"/></div>
+        <div class="fg"><label>محتوى المقال</label><textarea id="fb-cnt" style="min-height:240px;" placeholder="اكتب مقالك هنا..."></textarea></div>
+        <input type="hidden" id="fb-id"/>
+        <button class="bsave" onclick="saveBlog()">نشر المقال ✦</button>
+        <div class="ilist" id="adm-blg-list"></div>
+      </div>
+      <!-- SETTINGS TAB -->
+      <div class="tc" id="t-set">
+        <p class="sub-hd">إعدادات الموقع</p>
+        <div class="fg"><label>اسم الموقع</label><input type="text" id="fs-name" placeholder="عالم الظلال"/></div>
+        <div class="fg"><label>اسم الكاتب</label><input type="text" id="fs-aname" placeholder="اسمك"/></div>
+        <div class="fg"><label>نبذة عن الكاتب</label><textarea id="fs-abio" placeholder="اكتب نبذة عنك..."></textarea></div>
+        <div class="fg"><label>تغيير كلمة المرور</label><input type="password" id="fs-pass" placeholder="اتركه فارغاً للإبقاء على القديمة"/></div>
+        <button class="bsave" onclick="saveSets()">حفظ الإعدادات ✦</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+var CVR=['nc1','nc2','nc3'],SYM=['♥','✦','◈','❧','✿'];
+function gd(k,d){try{var v=localStorage.getItem(k);return v?JSON.parse(v):d;}catch(e){return d;}}
+function sd(k,v){localStorage.setItem(k,JSON.stringify(v));}
+function gNov(){return gd('novels',[]);}
+function sNov(v){sd('novels',v);}
+function gBlg(){return gd('blogs',[]);}
+function sBlg(v){sd('blogs',v);}
+function gPass(){return localStorage.getItem('adm_pass')||'1234';}
+function toast(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('show');setTimeout(function(){t.classList.remove('show');},2800);}
+
+function openAdm(){document.getElementById('adm').style.display='block';document.getElementById('adm-login').style.display='block';document.getElementById('adm-dash').style.display='none';document.getElementById('pinp').value='';document.getElementById('perr').style.display='none';}
+function closeAdm(){document.getElementById('adm').style.display='none';}
+function chkPass(){if(document.getElementById('pinp').value===gPass()){document.getElementById('adm-login').style.display='none';document.getElementById('adm-dash').style.display='block';loadAdmLists();loadSetsForm();}else{document.getElementById('perr').style.display='block';}}
+function stab(id,btn){document.querySelectorAll('.tc').forEach(function(t){t.classList.remove('act');});document.querySelectorAll('.tbtn').forEach(function(b){b.classList.remove('act');});document.getElementById(id).classList.add('act');btn.classList.add('act');}
+
+function saveNovel(){
+  var t=document.getElementById('fn-title').value.trim(),g=document.getElementById('fn-genre').value.trim(),e=document.getElementById('fn-exc').value.trim(),c=document.getElementById('fn-cnt').value.trim(),eid=document.getElementById('fn-id').value;
+  if(!t){toast('أدخل عنوان الرواية');return;}
+  var nov=gNov();
+  if(eid){var i=nov.findIndex(function(n){return n.id==eid;});if(i>-1){nov[i]=Object.assign(nov[i],{title:t,genre:g,excerpt:e,content:c});}}
+  else{nov.unshift({id:Date.now(),title:t,genre:g,excerpt:e,content:c,cover:CVR[nov.length%3],sym:SYM[nov.length%5]});}
+  sNov(nov);
+  ['fn-title','fn-genre','fn-exc','fn-cnt'].forEach(function(id){document.getElementById(id).value='';});
+  document.getElementById('fn-id').value='';document.getElementById('nov-fhd').textContent='إضافة رواية جديدة';
+  renderNov();loadAdmLists();toast('✦ تم حفظ الرواية');
+}
+function editNov(id){var n=gNov().find(function(x){return x.id==id;});if(!n)return;document.getElementById('fn-title').value=n.title||'';document.getElementById('fn-genre').value=n.genre||'';document.getElementById('fn-exc').value=n.excerpt||'';document.getElementById('fn-cnt').value=n.content||'';document.getElementById('fn-id').value=id;document.getElementById('nov-fhd').textContent='تعديل الرواية';stab('t-nov',document.querySelectorAll('.tbtn')[0]);document.getElementById('fn-title').scrollIntoView({behavior:'smooth'});}
+function delNov(id){if(!confirm('حذف هذه الرواية؟'))return;sNov(gNov().filter(function(n){return n.id!=id;}));renderNov();loadAdmLists();toast('تم الحذف');}
+
+function saveBlog(){
+  var t=document.getElementById('fb-title').value.trim(),tg=document.getElementById('fb-tags').value.trim(),c=document.getElementById('fb-cnt').value.trim(),eid=document.getElementById('fb-id').value;
+  if(!t){toast('أدخل عنوان المقال');return;}
+  var blg=gBlg(),now=new Date().toLocaleDateString('ar-SA',{year:'numeric',month:'long',day:'numeric'});
+  if(eid){var i=blg.findIndex(function(b){return b.id==eid;});if(i>-1){blg[i]=Object.assign(blg[i],{title:t,tags:tg,content:c});}}
+  else{blg.unshift({id:Date.now(),title:t,tags:tg,content:c,date:now});}
+  sBlg(blg);
+  ['fb-title','fb-tags','fb-cnt'].forEach(function(id){document.getElementById(id).value='';});
+  document.getElementById('fb-id').value='';document.getElementById('blg-fhd').textContent='كتابة مقال جديد';
+  renderBlg();loadAdmLists();toast('✦ تم نشر المقال');
+}
+function editBlg(id){var b=gBlg().find(function(x){return x.id==id;});if(!b)return;document.getElementById('fb-title').value=b.title||'';document.getElementById('fb-tags').value=b.tags||'';document.getElementById('fb-cnt').value=b.content||'';document.getElementById('fb-id').value=id;document.getElementById('blg-fhd').textContent='تعديل المقال';stab('t-blg',document.querySelectorAll('.tbtn')[1]);document.getElementById('fb-title').scrollIntoView({behavior:'smooth'});}
+function delBlg(id){if(!confirm('حذف هذا المقال؟'))return;sBlg(gBlg().filter(function(b){return b.id!=id;}));renderBlg();loadAdmLists();toast('تم الحذف');}
+
+function loadAdmLists(){
+  var nov=gNov();
+  document.getElementById('adm-nov-list').innerHTML=nov.length?nov.map(function(n){return '<div class="irow"><div class="irow-info"><div class="irow-t">'+n.title+'</div><div class="irow-m">'+(n.genre||'')+'</div></div><div class="irow-act"><button class="bedit" onclick="editNov('+n.id+')">تعديل</button><button class="bdel" onclick="delNov('+n.id+')">حذف</button></div></div>';}).join(''):'<p style="color:var(--txd);font-size:0.85rem;margin-top:1rem;">لا توجد روايات بعد.</p>';
+  var blg=gBlg();
+  document.getElementById('adm-blg-list').innerHTML=blg.length?blg.map(function(b){return '<div class="irow"><div class="irow-info"><div class="irow-t">'+b.title+'</div><div class="irow-m">'+(b.date||'')+'</div></div><div class="irow-act"><button class="bedit" onclick="editBlg('+b.id+')">تعديل</button><button class="bdel" onclick="delBlg('+b.id+')">حذف</button></div></div>';}).join(''):'<p style="color:var(--txd);font-size:0.85rem;margin-top:1rem;">لا توجد مقالات بعد.</p>';
+}
+
+function loadSetsForm(){var s=gd('site_sets',{});if(s.sn)document.getElementById('fs-name').value=s.sn;if(s.an)document.getElementById('fs-aname').value=s.an;if(s.ab)document.getElementById('fs-abio').value=s.ab;}
+function saveSets(){var sn=document.getElementById('fs-name').value.trim(),an=document.getElementById('fs-aname').value.trim(),ab=document.getElementById('fs-abio').value.trim(),np=document.getElementById('fs-pass').value;sd('site_sets',{sn:sn,an:an,ab:ab});if(np){localStorage.setItem('adm_pass',np);}applySets();document.getElementById('fs-pass').value='';toast('✦ تم حفظ الإعدادات');}
+function applySets(){var s=gd('site_sets',{});if(s.sn){document.getElementById('site-logo').textContent='✦ '+s.sn;document.getElementById('ft-logo').textContent='✦ '+s.sn;document.title=s.sn;}if(s.an)document.getElementById('aname').textContent=s.an;if(s.ab)document.getElementById('abio').textContent=s.ab;}
+
+function renderNov(){
+  var nov=gNov(),c=document.getElementById('novels-cont');
+  if(!nov.length){c.innerHTML='<p style="text-align:center;color:var(--txd);grid-column:1/-1;padding:2rem;">لم تُضف روايات بعد — افتح لوحة التحكم وأضف روايتك الأولى.</p>';return;}
+  c.innerHTML=nov.map(function(n){return '<div class="novel-card fi"><div class="novel-cover '+(n.cover||'nc1')+'"><span class="cover-sym">'+(n.sym||'♥')+'</span></div><div class="novel-info"><p class="novel-genre">'+(n.genre||'رواية')+'</p><h3 class="novel-title">'+n.title+'</h3><p class="novel-exc">'+(n.excerpt||'')+'</p>'+(n.content?'<button class="novel-link" onclick="openRead(\'n\','+n.id+')">اقرأ الفصل الأول ←</button>':'')+'</div></div>';}).join('');
+  obsFi();
+}
+function renderBlg(){
+  var blg=gBlg(),c=document.getElementById('blog-cont');
+  if(!blg.length){c.innerHTML='<p style="text-align:center;color:var(--txd);grid-column:1/-1;padding:2rem;">لم تُنشر مقالات بعد — افتح لوحة التحكم واكتب مقالك الأول.</p>';return;}
+  c.innerHTML=blg.map(function(b){var th=(b.tags||'').split(',').filter(function(t){return t.trim();}).map(function(t){return '<span class="blog-tag">'+t.trim()+'</span>';}).join('');var pv=(b.content||'').substring(0,160)+((b.content||'').length>160?'...':'');return '<article class="blog-card fi"><p class="blog-date">'+(b.date||'')+'</p><h3 class="blog-title">'+b.title+'</h3><p class="blog-exc">'+pv+'</p><div>'+th+'</div>'+(b.content?'<button class="blog-more" onclick="openRead(\'b\','+b.id+')">تابع القراءة ←</button>':'')+'</article>';}).join('');
+  obsFi();
+}
+
+function openRead(type,id){
+  var item=type==='n'?gNov().find(function(n){return n.id==id;}):gBlg().find(function(b){return b.id==id;});
+  if(!item)return;
+  var meta=type==='n'?(item.genre||'رواية'):(item.date||'');
+  document.getElementById('read-cnt').innerHTML='<div class="read-title">'+item.title+'</div><div class="read-meta">'+meta+'</div><div class="read-body">'+(item.content||'')+'</div>';
+  document.getElementById('read-ov').classList.add('open');
+}
+function closeRead(){document.getElementById('read-ov').classList.remove('open');}
+document.getElementById('read-ov').addEventListener('click',function(e){if(e.target===this)closeRead();});
+
+function subEmail(){var i=document.getElementById('email-inp');if(i.value.trim()){i.value='';i.placeholder='شكراً! سنتواصل معك قريباً ✦';setTimeout(function(){i.placeholder='بريدك الإلكتروني';},3000);}}
+
+function obsFi(){var o=new IntersectionObserver(function(es){es.forEach(function(e,i){if(e.isIntersecting){setTimeout(function(){e.target.classList.add('vis');},i*80);o.unobserve(e.target);}});},{threshold:0.1});document.querySelectorAll('.fi:not(.vis)').forEach(function(el){o.observe(el);});}
+
+window.addEventListener('DOMContentLoaded',function(){applySets();renderNov();renderBlg();obsFi();});
+</script>
+</body>
+</html>
